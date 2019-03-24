@@ -1,0 +1,5 @@
+# IDE
+.idea
+
+# Compiled files
+*.pyc
