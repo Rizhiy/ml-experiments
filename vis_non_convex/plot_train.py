@@ -111,7 +111,7 @@ def train():
         ax.plot(param_hist)
         if idx > 10:
             break
-    ax.set_title("Values of parameters with largest movement")
+    ax.set_title("Values of parameters with largest movement in the sample")
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Parameter values")
 
