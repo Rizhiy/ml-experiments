@@ -2,11 +2,11 @@
 Investigate how ML parameters change during training.
 
 # Motivation
-Deep learning model optimization is said non-convex,
+Deep learning model optimization is said to be non-convex,
 I wanted to visualise how much non-convex it is.
 
 # Results
-Results which are produced using `plot_train.py`, can be seen below.
+Results which are produced using `plot_train.py` can be seen below:
 
 ![Results](Paths.png)
 
@@ -15,4 +15,4 @@ The direction of movement for these parameters also changes quite a few times du
 even when using momentum.
 As a result parameters can pass through some values multiple times during training.
 
-Running `plot_train.py` will also show the same figure with 3d plot being interactive.
+Running `plot_train.py` will show similar figure with 3d plot being interactive.

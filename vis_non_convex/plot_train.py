@@ -15,7 +15,7 @@ from torchvision.datasets import CIFAR10
 from torchvision.models.resnet import resnet18
 from torchvision.transforms import Compose, Normalize, ToTensor
 
-sample_size = 200
+sample_size = 50
 print_freq = 100
 
 cache_path = Path('cache.pkl')
