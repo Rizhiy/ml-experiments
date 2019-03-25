@@ -17,6 +17,7 @@ from torchvision.transforms import Compose, Normalize, ToTensor
 
 sample_size = 50
 print_freq = 100
+cmap = 'rainbow'
 
 cache_path = Path('cache.pkl')
 
@@ -85,8 +86,9 @@ def train():
             pickle.dump((param_data, loss_hist), f)
 
     smooth_loss_hist = list(loss_hist[:1])
-    for loss in loss_hist:
+    for loss in loss_hist[1:]:
         smooth_loss_hist.append(smooth_loss_hist[-1] * 0.95 + 0.05 * loss)
+    smooth_loss_hist = np.array(smooth_loss_hist)
 
     colors = np.arange(len(param_data))
 
@@ -96,9 +98,8 @@ def train():
 
     fig = plt.figure(figsize=(14, 12))
     ax = plt.subplot(2, 2, 1)
-    ax.plot(loss_hist, c='lightblue')
-    ax.plot(smooth_loss_hist, c='blue')
-    ax.set_title("Loss graph")
+    ax.scatter(range(len(smooth_loss_hist)), smooth_loss_hist, s=1, c=colors, cmap=cmap)
+    ax.set_title("Smooth loss")
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Loss")
     ax.set_yscale('log')
@@ -118,20 +119,22 @@ def train():
     ax = plt.subplot(2, 2, 2)
     xs = param_data[:, order[0]]
     ys = param_data[:, order[1]]
-    ax.scatter(xs, ys, s=1, c=colors, cmap='hsv')
+    ax.scatter(xs, ys, s=1, c=colors, cmap=cmap)
     ax.set_title("Path of two params with largest movements in the sample")
     ax.set_xlabel("Param 1")
     ax.set_ylabel("Param 2")
     ax.text(xs[0], ys[0], "Start")
+    ax.text(xs[-1], ys[-1], "End")
 
     ax = plt.subplot(2, 2, 4, projection=Axes3D.name)
     zs = param_data[:, order[2]]
-    ax.scatter(xs, ys, zs, s=1, c=colors, cmap='hsv')
+    ax.scatter(xs, ys, zs, s=1, c=colors, cmap=cmap)
     ax.set_title("Path of three params with largest movements in the sample")
     ax.set_xlabel("Param 1")
     ax.set_ylabel("Param 2")
     ax.set_zlabel("Param 3")
     ax.text(xs[0], ys[0], zs[0], "Start")
+    ax.text(xs[-1], ys[-1], zs[-1], "End")
 
     fig.tight_layout()
     fig.savefig("Paths.png")
