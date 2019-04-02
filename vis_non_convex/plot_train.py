@@ -99,7 +99,7 @@ def train():
     fig = plt.figure(figsize=(14, 12))
     ax = plt.subplot(2, 2, 1)
     ax.scatter(range(len(smooth_loss_hist)), smooth_loss_hist, s=1, c=colors, cmap=cmap)
-    ax.set_title("Smooth loss")
+    ax.set_title("Smoothed loss")
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Loss")
     ax.set_yscale('log')
