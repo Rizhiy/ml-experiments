@@ -7,3 +7,4 @@
 # Local files
 data
 *.pkl
+*.onnx
